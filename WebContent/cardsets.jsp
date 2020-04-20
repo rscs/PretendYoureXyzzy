@@ -163,11 +163,11 @@ try {
       .setReadOnly(true).list();
   
   @SuppressWarnings("unchecked")
-  List<PyxBlackCard> blackCards = hibernateSession.createQuery("from PyxBlackCard order by id")
+  List<PyxBlackCard> blackCards = hibernateSession.createQuery("from PyxBlackCard order by text")
       .setReadOnly(true).list();
   
   @SuppressWarnings("unchecked")
-  List<PyxWhiteCard> whiteCards = hibernateSession.createQuery("from PyxWhiteCard order by id")
+  List<PyxWhiteCard> whiteCards = hibernateSession.createQuery("from PyxWhiteCard order by text")
       .setReadOnly(true).list();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
