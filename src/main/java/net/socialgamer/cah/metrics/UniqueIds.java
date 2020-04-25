@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import net.socialgamer.cah.CahModule.ServerStarted;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 
 import com.google.inject.Inject;
@@ -61,7 +62,7 @@ public class UniqueIds implements Provider<String> {
   static {
     String hn;
     try {
-      hn = InetAddress.getLocalHost().getHostName();
+      hn = DigestUtils.sha256Hex(InetAddress.getLocalHost().getHostName());
     } catch (final UnknownHostException e) {
       hn = UUID.randomUUID().toString();
       LOG.warn(String.format("Unable to determine hostname, using %s instead.", hn));

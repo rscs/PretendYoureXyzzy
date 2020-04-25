@@ -1,171 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>net.socialgamer</groupId>
-  <artifactId>pyx</artifactId>
-  <version>0.7.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <groupId>net.socialgamer</groupId>
+    <artifactId>pyx</artifactId>
+    <version>0.7.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-  <name>pyx</name>
+    <name>pyx</name>
 
-  <scm>
-    <url>https://github.com/ajanata/PretendYoureXyzzy</url>
-    <connection>scm:git:ssh://git@github.com/ajanata/PretendYoureXyzzy.git</connection>
-  </scm>
+    <scm>
+        <url>https://github.com/ajanata/PretendYoureXyzzy</url>
+        <connection>scm:git:ssh://git@github.com/ajanata/PretendYoureXyzzy.git</connection>
+    </scm>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <repositories>
-    <repository>
-      <id>hibernatesqlite-maven</id>
-      <url>https://hibernate-sqlite.googlecode.com/svn/trunk/mavenrepo</url>
-    </repository>
-  </repositories>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-  <developers>
-    <developer>
-      <id>ajanata</id>
-      <name>Andy Janata</name>
-      <email>ajanata@gmail.com</email>
-    </developer>
-  </developers>
+    <repositories>
+        <repository>
+            <id>hibernatesqlite-maven</id>
+            <url>https://hibernate-sqlite.googlecode.com/svn/trunk/mavenrepo</url>
+        </repository>
+    </repositories>
 
-  <build>
-    <finalName>ZY</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution>
-            <id>update-js-constants</id>
-            <phase>package</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <mainClass>net.socialgamer.cah.UpdateJsConstants</mainClass>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <executable>${java.home}/bin</executable>
+    <developers>
+        <developer>
+            <id>ajanata</id>
+            <name>Andy Janata</name>
+            <email>ajanata@gmail.com</email>
+        </developer>
+    </developers>
 
-          <!-- false = true and true = false... http://jira.codehaus.org/browse/MCOMPILER-209 -->
-          <useIncrementalCompilation>false</useIncrementalCompilation>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <version>1.3.1</version>
-        <executions>
-          <execution>
-            <id>enforce-files-exist</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireFilesExist>
-                  <files>
-                    <file>build.properties</file>
-                  </files>
-                </requireFilesExist>
-              </rules>
-              <fail>true</fail>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- Read database credentials etc. from file. -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <version>1.0-alpha-2</version>
-        <executions>
-          <execution>
-            <id>read-build-properties</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>read-project-properties</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>read-report-properties</id>
-            <phase>pre-site</phase>
-            <goals>
-              <goal>read-project-properties</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <files>
-            <file>build.properties</file>
-          </files>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.4</version>
+    <build>
+        <finalName>ZY</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>update-js-constants</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>net.socialgamer.cah.UpdateJsConstants</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <executable>${java.home}/bin</executable>
 
-        <!-- for exploded war -->
-        <!--
-        <executions>
-          <execution>
-            <id>default-war</id>
-            <phase>none</phase>
-          </execution>
-          <execution>
-            <id>war-exploded</id>
-            <phase>package</phase>
-            <goals>
-              <goal>exploded</goal>
-            </goals>
-          </execution>
-        </executions>
-        -->
+                    <!-- false = true and true = false... http://jira.codehaus.org/browse/MCOMPILER-209 -->
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-files-exist</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireFilesExist>
+                                    <files>
+                                        <file>build.properties</file>
+                                    </files>
+                                </requireFilesExist>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Read database credentials etc. from file. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <id>read-build-properties</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>read-report-properties</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <files>
+                        <file>build.properties</file>
+                    </files>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
 
-        <configuration>
-          <webResources>
-            <resource>
-              <directory>src/main/resources</directory>
-              <filtering>false</filtering>
-            </resource>
-            <resource>
-              <directory>src/main/filtered-resources</directory>
-              <filtering>true</filtering>
-            </resource>
-            <resource>
-              <directory>WebContent</directory>
-              <filtering>false</filtering>
-            </resource>
-          </webResources>
+                <!-- for exploded war -->
+                <!--
+                <executions>
+                  <execution>
+                    <id>default-war</id>
+                    <phase>none</phase>
+                  </execution>
+                  <execution>
+                    <id>war-exploded</id>
+                    <phase>package</phase>
+                    <goals>
+                      <goal>exploded</goal>
+                    </goals>
+                  </execution>
+                </executions>
+                -->
 
-          <!-- Web XML is in a filtered folder due to the DTD -->
-          <failOnMissingWebXml>false</failOnMissingWebXml>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>false</filtering>
+                        </resource>
+                        <resource>
+                            <directory>src/main/filtered-resources</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>WebContent</directory>
+                            <filtering>false</filtering>
+                        </resource>
+                    </webResources>
 
-          <!-- Pack classes into a jar -->
-          <archiveClasses>true</archiveClasses>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.3.0.v20150612</version>
+                    <!-- Web XML is in a filtered folder due to the DTD -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+
+                    <!-- Pack classes into a jar -->
+                    <archiveClasses>true</archiveClasses>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.0.v20150612</version>
 
         <configuration>
           <!-- Uncomment this to enable JMX in Jetty for debugging. -->
@@ -296,6 +296,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
         </dependency>
         <dependency>
             <groupId>org.xerial</groupId>
