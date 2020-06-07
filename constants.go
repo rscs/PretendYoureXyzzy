@@ -348,6 +348,7 @@ type GameOptionData struct {
 	ScoreLimit int `json:"sl"`
 	BlanksLimit int `json:"bl"`
 	PlayerLimit int `json:"pL"`
+	PickCardLimit int `json:"cl"`
 	CardSets []int `json:"css"`
 }
 

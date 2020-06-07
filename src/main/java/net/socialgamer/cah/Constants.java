@@ -794,6 +794,8 @@ public class Constants {
   public enum GameOptionData {
     @GoDataType("int")
     BLANKS_LIMIT("bl"),
+    @GoDataType("int")
+    PICK_CARD_LIMIT("cl"),
     @DuplicationAllowed
     @GoDataType("[]int")
     CARD_SETS(AjaxResponse.CARD_SETS),

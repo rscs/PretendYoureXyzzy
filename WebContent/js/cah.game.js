@@ -106,6 +106,7 @@ cah.Game = function(id) {
   $("#game_hide_password_template", this.optionsElement_).attr("id", "game_hide_password_" + id);
   $("#timer_multiplier_template", this.optionsElement_).attr("id", "timer_multiplier_" + id);
   $("#blanks_limit_template", this.optionsElement_).attr("id", "blanks_limit_" + id);
+  $("#pick_card_limit_template", this.optionsElement_).attr("id", "pick_card_limit_" + id);
 
   for ( var key in cah.CardSet.byWeight) {
     /** @type {cah.CardSet} */
@@ -882,6 +883,7 @@ cah.Game.prototype.updateGameStatus = function(data) {
     $("#card_set_" + this.id_ + "_" + cardSetId, this.optionsElement_).attr("checked", "checked");
   }
   $(".blanks_limit", this.optionsElement_).val(options[cah.$.GameOptionData.BLANKS_LIMIT]);
+  $(".pick_card_limit", this.optionsElement_).val(options[cah.$.GameOptionData.PICK_CARD_LIMIT]);
 
   var playerInfos = data[cah.$.AjaxResponse.PLAYER_INFO];
   for ( var index in playerInfos) {
@@ -1505,6 +1507,7 @@ cah.Game.prototype.optionChanged_ = function(e) {
   options[cah.$.GameOptionData.SPECTATOR_LIMIT] = $(".spectator_limit", this.optionsElement_).val();
   options[cah.$.GameOptionData.PASSWORD] = $(".game_password", this.optionsElement_).val();
   options[cah.$.GameOptionData.BLANKS_LIMIT] = $(".blanks_limit", this.optionsElement_).val();
+  options[cah.$.GameOptionData.PICK_CARD_LIMIT] = $(".pick_card_limit", this.optionsElement_).val();
   options[cah.$.GameOptionData.TIMER_MULTIPLIER] = $('.timer_multiplier', this.optionsElement_)
       .val();
 
