@@ -41,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.socialgamer.cah.Server;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -1227,7 +1228,13 @@ public class Game {
      */
     private WhiteCard getNextWhiteCard() {
         try {
-            return whiteDeck.getNextCard();
+            WhiteCard card = whiteDeck.getNextCard();
+            if (!Server.seenWhiteCard(card)) {
+                Server.addWhiteCard(card);
+                return card;
+            } else {
+                return getNextWhiteCard();
+            }
         } catch (final OutOfCardsException e) {
             whiteDeck.reshuffle();
             final HashMap<ReturnableData, Object> data = getEventMap();
@@ -1244,7 +1251,8 @@ public class Game {
         try {
             // Ensure the card picked is less than or equal to the pick card limit for this game
             BlackCard card = blackDeck.getNextCard();
-            if (card.getPick() <= options.pickCardLimit) {
+            if (card.getPick() <= options.pickCardLimit && !Server.seenBlackCard(card)) {
+                Server.addBlackCard(card);
                 return card;
             } else {
                 return getNextBlackCard();

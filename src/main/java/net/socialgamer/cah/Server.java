@@ -1,16 +1,16 @@
 /**
  * Copyright (c) 2012, Andy Janata
  * All rights reserved.
- * 
+ * <p>
  * Redistribution and use in source and binary forms, with or without modification, are permitted
  * provided that the following conditions are met:
- * 
+ * <p>
  * * Redistributions of source code must retain the above copyright notice, this list of conditions
- *   and the following disclaimer.
+ * and the following disclaimer.
  * * Redistributions in binary form must reproduce the above copyright notice, this list of
- *   conditions and the following disclaimer in the documentation and/or other materials provided
- *   with the distribution.
- * 
+ * conditions and the following disclaimer in the documentation and/or other materials provided
+ * with the distribution.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
@@ -23,34 +23,56 @@
 
 package net.socialgamer.cah;
 
+import net.socialgamer.cah.data.BlackCard;
 import net.socialgamer.cah.data.ConnectedUsers;
 import net.socialgamer.cah.data.GameManager;
+import net.socialgamer.cah.data.WhiteCard;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import java.util.ArrayList;
+
 
 /**
  * I believe this class is not actually used nor required.
- * 
+ *
  * @author Andy Janata (ajanata@socialgamer.net)
  */
 @Singleton
 public class Server {
-  private final ConnectedUsers users;
-  private final GameManager gameManager;
+    private final ConnectedUsers users;
+    private final GameManager gameManager;
+    private static final ArrayList<Integer> seenBlackCards = new ArrayList<>();
+    private static final ArrayList<Integer> seenWhiteCards = new ArrayList<>();
 
-  @Inject
-  public Server(final ConnectedUsers connectedUsers, final GameManager gameManager) {
-    users = connectedUsers;
-    this.gameManager = gameManager;
-  }
+    @Inject
+    public Server(final ConnectedUsers connectedUsers, final GameManager gameManager) {
+        users = connectedUsers;
+        this.gameManager = gameManager;
+    }
 
-  public ConnectedUsers getConnectedUsers() {
-    return this.users;
-  }
+    public ConnectedUsers getConnectedUsers() {
+        return this.users;
+    }
 
-  public GameManager getGameManager() {
-    return this.gameManager;
-  }
+    public GameManager getGameManager() {
+        return this.gameManager;
+    }
+
+    public static boolean seenBlackCard(BlackCard card) {
+        return seenBlackCards.contains(card.getId());
+    }
+
+    public static boolean seenWhiteCard(WhiteCard card) {
+        return seenWhiteCards.contains(card.getId());
+    }
+
+    public static void addBlackCard(BlackCard card) {
+        seenBlackCards.add(card.getId());
+    }
+
+    public static void addWhiteCard(WhiteCard card) {
+        seenWhiteCards.add(card.getId());
+    }
 }
