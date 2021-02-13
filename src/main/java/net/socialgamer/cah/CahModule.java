@@ -581,4 +581,43 @@ public class CahModule extends AbstractModule {
       return Integer.valueOf(properties.getProperty("pyx.game.max_blank_card_limit", "30"));
     }
   }
+
+  @BindingAnnotation
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface MinPickCardLimit {
+  }
+
+  @Provides
+  @MinPickCardLimit
+  Integer provideMinPickCardLimit() {
+    synchronized (properties) {
+      return Integer.valueOf(properties.getProperty("pyx.game.min_pick_card_limit", "1"));
+    }
+  }
+
+  @BindingAnnotation
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface DefaultPickCardLimit {
+  }
+
+  @Provides
+  @DefaultPickCardLimit
+  Integer provideDefaultPickCardLimit() {
+    synchronized (properties) {
+      return Integer.valueOf(properties.getProperty("pyx.game.default_pick_card_limit", "1"));
+    }
+  }
+
+  @BindingAnnotation
+  @Retention(RetentionPolicy.RUNTIME)
+  public @interface MaxPickCardLimit {
+  }
+
+  @Provides
+  @MaxPickCardLimit
+  Integer provideMaxPickCardLimit() {
+    synchronized (properties) {
+      return Integer.valueOf(properties.getProperty("pyx.game.max_pick_card_limit", "5"));
+    }
+  }
 }

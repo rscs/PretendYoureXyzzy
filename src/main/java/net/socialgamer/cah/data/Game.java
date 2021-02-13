@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import net.socialgamer.cah.CahModule.*;
 import net.socialgamer.cah.Constants.*;
+import net.socialgamer.cah.Server;
 import net.socialgamer.cah.cardcast.CardcastDeck;
 import net.socialgamer.cah.cardcast.CardcastService;
 import net.socialgamer.cah.data.GameManager.GameId;
@@ -1210,7 +1211,13 @@ public class Game {
      */
     private WhiteCard getNextWhiteCard() {
         try {
-            return whiteDeck.getNextCard();
+            WhiteCard card = whiteDeck.getNextCard();
+            if (!Server.seenWhiteCard(card)) {
+                Server.addWhiteCard(card);
+                return card;
+            } else {
+                return getNextWhiteCard();
+            }
         } catch (final OutOfCardsException e) {
             whiteDeck.reshuffle();
             final HashMap<ReturnableData, Object> data = getEventMap();
@@ -1225,7 +1232,14 @@ public class Game {
      */
     private BlackCard getNextBlackCard() {
         try {
-            return blackDeck.getNextCard();
+            // Ensure the card picked is less than or equal to the pick card limit for this game
+            BlackCard card = blackDeck.getNextCard();
+            if (card.getPick() <= options.pickCardLimit && !Server.seenBlackCard(card)) {
+                Server.addBlackCard(card);
+                return card;
+            } else {
+                return getNextBlackCard();
+            }
         } catch (final OutOfCardsException e) {
             blackDeck.reshuffle();
             final HashMap<ReturnableData, Object> data = getEventMap();

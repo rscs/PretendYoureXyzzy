@@ -104,20 +104,18 @@ boolean allowBlankCards = injector.getInstance(Key.get(new TypeLiteral<Boolean>(
     <a href="https://gist.githubusercontent.com/ajanata/07ededdb584f7bb77a8c7191d3a4bbcc/raw/e76faacc19c2bb598a1a8fd94b9ebcb29c5502e0">
     here's why.</a></li>
   </ul>
-  <h2>The servers are incredibly busy right now. There are several servers to try, there will be
-  room elsewhere! <a href='https://pretendyoure.xyz/zy'>CLICK HERE</a> to see the server list. As
-  long as you're on the same server as your friends, you can play together. Please stop crowding
-  pyx-1 ("The Biggest, Blackest Dick").</h2>
   <div id="nickbox">
     <label for="nickname">Nickname:</label>
     <input type="text" id="nickname" value="" maxlength="30" role="textbox"
         aria-label="Enter your nickname." data-lpignore="true" />
     <label for="idcode">
+        <!--
     <dfn title="Only available via HTTPS. Provide a secret identification code to positively identify yourself in the chat.">
     Optional identification code:</dfn></label>
     <input type="password" id="idcode" value="" maxlength="100" disabled="disabled"
         aria-label="Optionally enter an identification code." />
     <a href="https://github.com/ajanata/PretendYoureXyzzy/wiki/Identification-Codes">(Help)</a>
+    -->
     <input type="button" id="nicknameconfirm" value="Set" />
     <span id="nickbox_error" class="error"></span>
   </div>
@@ -464,7 +462,7 @@ boolean allowBlankCards = injector.getInstance(Key.get(new TypeLiteral<Boolean>(
       	<option value="0.25x">0.25x</option>
       	<option value="0.5x">0.5x</option>
       	<option value="0.75x">0.75x</option>
-      	<option selected="selected" value="1x">1x</option>
+      	<option value="1x">1x</option>
       	<option value="1.25x">1.25x</option>
       	<option value="1.5x">1.5x</option>
       	<option value="1.75x">1.75x</option>
@@ -474,7 +472,7 @@ boolean allowBlankCards = injector.getInstance(Key.get(new TypeLiteral<Boolean>(
       	<option value="4x">4x</option>
       	<option value="5x">5x</option>
       	<option value="10x">10x</option>
-      	<option value="Unlimited">Unlimited</option>
+      	<option selected="selected" value="Unlimited">Unlimited</option>
       </select>
       <br/>
       <fieldset class="card_sets">
@@ -482,6 +480,16 @@ boolean allowBlankCards = injector.getInstance(Key.get(new TypeLiteral<Boolean>(
         <span class="base_card_sets"></span>
         <span class="extra_card_sets"></span>
       </fieldset>
+        <br/>
+        <label id="pick_card_limit_label" title="Pick card limit">
+            Pick card limit: <select id="pick_card_limit_template" class="pick_card_limit">
+            <%
+                for (int i = injector.getInstance(Key.get(Integer.class, MinPickCardLimit.class)); i <= injector.getInstance(Key.get(Integer.class, MaxPickCardLimit.class)); i++) {
+            %>
+            <option <%= i == injector.getInstance(Key.get(Integer.class, DefaultPickCardLimit.class)) ? "selected='selected' " : "" %>value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+        </label>
       <% if (allowBlankCards) { %>
         <br/>
         <label id="blanks_limit_label" title="Blank cards allow a player to type in their own answer.">

@@ -54,19 +54,24 @@ public class GameOptions {
     public final int minBlankCardLimit;
     public final int defaultBlankCardLimit;
     public final int maxBlankCardLimit;
+    public final int minPickCardLimit;
+    public final int defaultPickCardLimit;
+    public final int maxPickCardLimit;
     // These are the default values new games get.
     public int blanksInDeck;
+    public int pickCardLimit;
     public int playerLimit;
     public int spectatorLimit;
     public int scoreGoal;
     public String password = "";
-    public String timerMultiplier = "1x";
+    public String timerMultiplier = "Unlimited";
 
     @Inject
     public GameOptions(@MaxPlayerLimit int maxPlayerLimit, @DefaultPlayerLimit int defaultPlayerLimit, @MinPlayerLimit int minPlayerLimit,
                        @MaxSpectatorLimit int maxSpectatorLimit, @DefaultSpectatorLimit int defaultSpectatorLimit, @MinSpectatorLimit int minSpectatorLimit,
                        @MinScoreLimit int minScoreLimit, @MaxScoreLimit int maxScoreLimit, @DefaultScoreLimit int defaultScoreLimit,
-                       @MinBlankCardLimit int minBlankCardLimit, @DefaultBlankCardLimit int defaultBlankCardLimit, @MaxBlankCardLimit int maxBlankCardLimit) {
+                       @MinBlankCardLimit int minBlankCardLimit, @DefaultBlankCardLimit int defaultBlankCardLimit, @MaxBlankCardLimit int maxBlankCardLimit,
+                       @MinPickCardLimit int minPickCardLimit, @DefaultPickCardLimit int defaultPickCardLimit, @MaxPickCardLimit int maxPickCardLimit) {
         this.maxPlayerLimit = maxPlayerLimit;
         this.defaultPlayerLimit = playerLimit = defaultPlayerLimit;
         this.minPlayerLimit = minPlayerLimit;
@@ -79,6 +84,9 @@ public class GameOptions {
         this.minBlankCardLimit = minBlankCardLimit;
         this.defaultBlankCardLimit = blanksInDeck = defaultBlankCardLimit;
         this.maxBlankCardLimit = maxBlankCardLimit;
+        this.minPickCardLimit = minPickCardLimit;
+        this.defaultPickCardLimit = pickCardLimit = defaultPickCardLimit;
+        this.maxPickCardLimit = maxPickCardLimit;
     }
 
     public static GameOptions deserialize(Provider<GameOptions> provider, final String text) {
@@ -99,6 +107,8 @@ public class GameOptions {
 
         options.blanksInDeck = Math.max(options.minBlankCardLimit, Math.min(options.maxBlankCardLimit,
                 json.getInteger(GameOptionData.BLANKS_LIMIT, options.blanksInDeck)));
+        options.pickCardLimit = Math.max(options.minPickCardLimit, Math.min(options.maxPickCardLimit,
+                json.getInteger(GameOptionData.PICK_CARD_LIMIT, options.pickCardLimit)));
         options.playerLimit = Math.max(options.minPlayerLimit, Math.min(options.maxPlayerLimit,
                 json.getInteger(GameOptionData.PLAYER_LIMIT, options.playerLimit)));
         options.spectatorLimit = Math.max(options.minSpectatorLimit, Math.min(options.maxSpectatorLimit,
@@ -126,6 +136,7 @@ public class GameOptions {
             this.cardSetIds.addAll(newOptions.cardSetIds);
         }
         this.blanksInDeck = newOptions.blanksInDeck;
+        this.pickCardLimit = newOptions.pickCardLimit;
         this.password = newOptions.password;
         this.timerMultiplier = newOptions.timerMultiplier;
     }
@@ -143,6 +154,7 @@ public class GameOptions {
 
         info.put(GameOptionData.CARD_SETS, cardSetIds);
         info.put(GameOptionData.BLANKS_LIMIT, blanksInDeck);
+        info.put(GameOptionData.PICK_CARD_LIMIT, pickCardLimit);
         info.put(GameOptionData.PLAYER_LIMIT, playerLimit);
         info.put(GameOptionData.SPECTATOR_LIMIT, spectatorLimit);
         info.put(GameOptionData.SCORE_LIMIT, scoreGoal);

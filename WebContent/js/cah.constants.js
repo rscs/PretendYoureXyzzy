@@ -253,6 +253,7 @@ cah.$.GameOptionData.PASSWORD = "pw";
 cah.$.GameOptionData.SPECTATOR_LIMIT = "vL";
 cah.$.GameOptionData.SCORE_LIMIT = "sl";
 cah.$.GameOptionData.BLANKS_LIMIT = "bl";
+cah.$.GameOptionData.PICK_CARD_LIMIT = "pcl";
 cah.$.GameOptionData.PLAYER_LIMIT = "pL";
 cah.$.GameOptionData.CARD_SETS = "css";
 

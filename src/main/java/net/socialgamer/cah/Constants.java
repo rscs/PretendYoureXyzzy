@@ -795,7 +795,7 @@ public class Constants {
     @GoDataType("int")
     BLANKS_LIMIT("bl"),
     @GoDataType("int")
-    PICK_CARD_LIMIT("cl"),
+    PICK_CARD_LIMIT("pcl"),
     @DuplicationAllowed
     @GoDataType("[]int")
     CARD_SETS(AjaxResponse.CARD_SETS),

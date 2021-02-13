@@ -337,6 +337,7 @@ const (
 	GameOptionData_SPECTATOR_LIMIT = "vL"
 	GameOptionData_SCORE_LIMIT = "sl"
 	GameOptionData_BLANKS_LIMIT = "bl"
+	GameOptionData_PICK_CARD_LIMIT = "pcl"
 	GameOptionData_PLAYER_LIMIT = "pL"
 	GameOptionData_CARD_SETS = "css"
 )
@@ -348,7 +349,7 @@ type GameOptionData struct {
 	ScoreLimit int `json:"sl"`
 	BlanksLimit int `json:"bl"`
 	PlayerLimit int `json:"pL"`
-	PickCardLimit int `json:"cl"`
+	PickCardLimit int `json:"pcl"`
 	CardSets []int `json:"css"`
 }
 

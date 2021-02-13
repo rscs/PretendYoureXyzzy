@@ -105,6 +105,10 @@ public class JavascriptConfigServlet extends HttpServlet {
     builder.append(String.format("cah.DEFAULT_BLANK_CARD_LIMIT = %d;\n", injector.getInstance(Key.get(Integer.class, DefaultBlankCardLimit.class))));
     builder.append(String.format("cah.MAX_BLANK_CARD_LIMIT = %d;\n", injector.getInstance(Key.get(Integer.class, MaxBlankCardLimit.class))));
 
+    builder.append(String.format("cah.MIN_PICK_CARD_LIMIT = %d;\n", injector.getInstance(Key.get(Integer.class, MinPickCardLimit.class))));
+    builder.append(String.format("cah.DEFAULT_PICK_CARD_LIMIT = %d;\n", injector.getInstance(Key.get(Integer.class, DefaultPickCardLimit.class))));
+    builder.append(String.format("cah.MAX_PICK_CARD_LIMIT = %d;\n", injector.getInstance(Key.get(Integer.class, MaxPickCardLimit.class))));
+
     resp.setContentType("text/javascript");
     final PrintWriter out = resp.getWriter();
     out.println(builder.toString());

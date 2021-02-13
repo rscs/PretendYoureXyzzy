@@ -85,7 +85,8 @@ public class GameManagerTest {
       return new GameOptions(20, 10, 3,
               20, 10, 0,
               4, 69, 8,
-              0, 0, 30);
+              0, 0, 30,
+              1, 1, 5);
     }
   };
   private final Provider<Boolean> falseProvider = new Provider<Boolean>() {

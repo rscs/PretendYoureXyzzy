@@ -72,6 +72,9 @@ pyx.game.max_spectator_limit=20
 pyx.game.min_blank_card_limit=0
 pyx.game.default_blank_card_limit=0
 pyx.game.max_blank_card_limit=30
+pyx.game.min_pick_card_limit=1
+pyx.game.default_pick_card_limit=1
+pyx.game.max_pick_card_limit=5
 
 # for production use, use postgres
 #hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect

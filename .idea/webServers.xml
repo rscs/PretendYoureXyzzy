@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4ad21664-c1f9-48d8-96de-f57852775e40" name="xenon">
+        <fileTransfer accessType="SFTP" host="10.75.180.50" port="22" sshConfigId="63be39dc-fb62-4c4c-b116-cccce6146567" sshConfig="xenon" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

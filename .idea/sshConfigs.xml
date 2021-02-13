@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="10.75.180.50" id="63be39dc-fb62-4c4c-b116-cccce6146567" keyPath="C:\Users\Ryan Smith\Dropbox (Personal)\SSH Configuration\Keys\aws-20210127-jebrains.pem" port="22" customName="xenon" nameFormat="CUSTOM" username="rscs">
+        <option name="customName" value="xenon" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>
